@@ -1,26 +1,31 @@
-# 🛠️ Guía de Configuración de Máquina Virtual (VM) Segura
+# 🛠️ Secure Virtual Machine (VM) Setup Guide
 
-**NUNCA ejecute este código en su sistema principal.** Siga esta guía para configurar un entorno seguro.
+**NEVER execute this code on your primary system.** Follow this guide to set up a secure testing environment.
 
-## 1. Requisitos
+## 1. Requirements
 
-* Software de Virtualización (ej. **VirtualBox**, **VMware Workstation Player**).
-* Una imagen ISO de un sistema operativo Windows (Windows 10 o 11) para instalar en la VM.
+* Virtualization Software (e.g., **VirtualBox**, **VMware Workstation Player**).
+* A Windows OS ISO image (Windows 10 or 11) to install on the VM.
 
-## 2. Configuración de la VM
+## 2. VM Configuration
 
-1.  **Instalar el SO:** Cree una nueva máquina virtual e instale el sistema operativo Windows de prueba.
-2.  **Modo de Red Aislado:** Configure el adaptador de red de la VM en modo **"Solo anfitrión"** (*Host-Only*) o **"NAT"** (sin redireccionamiento de puertos) o, idealmente, **"Red interna"** para aislarlo completamente de su red doméstica o corporativa.
-3.  **Snapshot (Instantánea):** Una vez que el sistema operativo esté completamente instalado y funcional, **tome una instantánea (Snapshot)**. Esto permite revertir la VM a este estado limpio en segundos, sin importar el daño *simulado* que cause el *payload*.
+1.  **Install the OS:** Create a new virtual machine and install the test Windows operating system.
+2.  **Isolated Network Mode:** Configure the VM's network adapter to **"Host-Only"** or **"Internal Network"** mode. This ensures complete isolation from your home or corporate network.
 
-## 3. Preparación del Entorno de Prueba
 
-1.  **Cree una Carpeta:** Dentro de la VM, cree una carpeta llamada `C:\TestEnv`.
-2.  **Transferencia de Archivos:** Use la función de arrastrar y soltar de su software de virtualización (o una carpeta compartida) para transferir los contenidos de `Simulation_Payload/` y `Cleanup_Tool.bat` a `C:\TestEnv` en la VM.
 
-## 4. Reversión Rápida
+3.  **Snapshot:** Once the OS is fully installed and functional, **take a Snapshot**. This allows you to revert the VM to this clean state in seconds, regardless of any *simulated* damage caused by the payload.
 
-Si el *payload* causa cualquier problema inesperado:
 
-* **Opción A (Recomendada):** Apague la VM y **revierta a la instantánea** tomada en el Paso 2.
-* **Opción B (Manual):** Ejecute `Cleanup_Tool.bat` y reinicie la VM.
+
+## 3. Preparing the Test Environment
+
+1.  **Create a Folder:** Inside the VM, create a folder named `C:\TestEnv`.
+2.  **File Transfer:** Use the "Drag and Drop" feature of your virtualization software (or a shared folder) to transfer the contents of `Simulation_Payload/` and `Cleanup_Tool.bat` to `C:\TestEnv` inside the VM.
+
+## 4. Quick Reversion
+
+If the payload causes any unexpected issues:
+
+* **Option A (Recommended):** Power off the VM and **revert to the snapshot** taken in Step 2.
+* **Option B (Manual):** Run `Cleanup_Tool.bat` and restart the VM.

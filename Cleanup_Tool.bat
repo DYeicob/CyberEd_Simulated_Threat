@@ -1,27 +1,27 @@
 @echo off
-Title Herramienta de Limpieza y Reversión SimuThreat
+Title SimuThreat Cleanup and Reversion Tool
 echo =========================================================
-echo [SIMUTHREAT] Limpieza de Consecuencias Iniciada
+echo [SIMUTHREAT] Consequence Cleanup Initiated
 echo =========================================================
 
-:: 1. Detiene el apagado programado
-echo > Deteniendo cualquier apagado programado...
+:: 1. Stops any scheduled shutdown
+echo > Stopping any scheduled shutdown...
 shutdown /a
-echo   -> Apagado cancelado (si estaba activo).
+echo    -> Shutdown canceled (if it was active).
 
-:: 2. Cierra la Lupa (Inversion de color)
-echo > Cerrando la herramienta de Lupa (magnify)...
+:: 2. Closes Magnifier (Color inversion)
+echo > Closing the Magnifier tool (magnify)...
 taskkill /IM magnify.exe /F 2>nul
-echo   -> Inversion de pantalla desactivada.
+echo    -> Screen inversion disabled.
 
-:: 3. Restaura la distribucion del teclado (Ejemplo: a LCID 1033 - Ingles US, si no se especifica español)
-:: NOTA: Se recomienda usar el LCID de su entorno de prueba (Ej. 3082 para Espanol de Espana)
-echo > Restaurando la configuracion de teclado (LCID 1033 - US Default)...
-powershell -Command "$List = Get-WinUserLanguageList; $DefaultLCID = 1033; $Culture = Get-Culture; $Culture.KeyboardLayoutId = $DefaultLCID; $Culture | Set-Culture; Write-Host '   -> Teclado restaurado (comprobar la distribucion).'"
+:: 3. Restores the keyboard layout (Example: to LCID 1033 - English US)
+:: NOTE: It is recommended to use the LCID of your specific test environment (e.g., 3082 for Spanish - Spain)
+echo > Restoring keyboard settings (LCID 1033 - US Default)...
+powershell -Command "$List = Get-WinUserLanguageList; $DefaultLCID = 1033; $Culture = Get-Culture; $Culture.KeyboardLayoutId = $DefaultLCID; $Culture | Set-Culture; Write-Host '   -> Keyboard restored (check layout).'"
 
 echo.
 echo =========================================================
-echo Limpieza completa. El entorno de prueba esta estable.
+echo Cleanup complete. The testing environment is stable.
 echo =========================================================
 
 pause

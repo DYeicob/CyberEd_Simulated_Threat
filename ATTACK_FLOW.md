@@ -1,41 +1,41 @@
-# 📈 Flujo de Demostración del Ataque Simulado (SimuThreat)
+# 📈 Simulated Attack Demonstration Flow (SimuThreat)
 
-Este documento guía al instructor (o al usuario) a través de las fases del ataque simulado.
+This document guides the instructor (or the user) through the phases of the simulated attack.
 
-## FASE 1: Vector de Entrega (Ingeniería Social)
+## PHASE 1: Delivery Vector (Social Engineering)
 
-* **Acción:** El instructor explica que el archivo `01_Initial_Execution.bat` simula un archivo descargado de un correo electrónico de *phishing* o un sitio web malicioso.
-* **Concepto:** La confianza del usuario es el primer vector de ataque.
-* **Ejecución:** El usuario hace doble clic en `01_Initial_Execution.bat`.
+* **Action:** The instructor explains that the file `01_Initial_Execution.bat` simulates a file downloaded from a phishing email or a malicious website.
+* **Concept:** User trust is the primary attack vector.
+* **Execution:** The user double-clicks `01_Initial_Execution.bat`.
 
-## FASE 2: Ejecución del Payload y Bloqueo
+## PHASE 2: Payload Execution and Lockdown
 
-* **Acción:** `01_Initial_Execution.bat` ejecuta silenciosamente el script de PowerShell (`02_Lock_Simulator.ps1`).
-* **Efecto:** Aparece una ventana emergente de "ALERTA DE SEGURIDAD" con una cuenta atrás de 120 segundos.
-* **Concepto:** El *payload* se ha ejecutado y ha tomado el control del bucle de interacción del usuario.
+* **Action:** `01_Initial_Execution.bat` silently executes the PowerShell script (`02_Lock_Simulator.ps1`).
+* **Effect:** A "SECURITY ALERT" pop-up window appears with a 120-second countdown.
+* **Concept:** The payload has executed and taken control of the user's interaction loop.
 
-## FASE 3A: Opción de Éxito (Uso del Killswitch)
+## PHASE 3A: Success Option (Using the Killswitch)
 
-* **Instrucción:** Demostrar que el ataque está "controlado" por el atacante.
-* **Acción:** Antes de que expire el tiempo, introduzca la contraseña secreta (establecida en el script, ej: `miContraseñaSecreta`).
-* **Resultado:** El script se cierra inmediatamente, deteniendo el flujo sin consecuencias.
-* **Concepto:** Demostración del **Killswitch** — una salida programada utilizada tanto para pruebas como a veces por los atacantes.
+* **Instruction:** Demonstrate that the attack is "controlled" by the attacker.
+* **Action:** Before the time expires, enter the secret password (defined in the script, e.g., `mySecretPassword`).
+* **Result:** The script closes immediately, stopping the flow without further consequences.
+* **Concept:** Demonstration of the **Killswitch** — a programmed exit used for testing and sometimes by real-world attackers.
 
-## FASE 3B: Opción de Falla (Activación de la Consecuencia)
+## PHASE 3B: Failure Option (Consequence Activation)
 
-* **Instrucción:** Dejar que la cuenta atrás llegue a cero.
-* **Acción:** Cuando el tiempo expira, el script de PowerShell llama a `03_Reversible_Consequence.bat`.
-* **Efecto:**
-    1.  Se activa la herramienta Lupa (`magnify -inv`), invirtiendo los colores de la pantalla.
-    2.  Se cambia la distribución del teclado al Chino (simplificado).
-    3.  Aparece un aviso de apagado del sistema en 60 segundos.
-* **Conceptos:** **LOLBAS** (Lupa) y **Persistencia Simulada** (Apagado programado).
+* **Instruction:** Allow the countdown to reach zero.
+* **Action:** When time expires, the PowerShell script calls `03_Reversible_Consequence.bat`.
+* **Effect:**
+    1.  The Magnifier tool is activated (`magnify -inv`), inverting the screen colors.
+    2.  The keyboard layout is changed to Chinese (Simplified).
+    3.  A system shutdown notice appears, scheduled for 60 seconds.
+* **Concepts:** **LOLBAS** (Magnifier) and **Simulated Persistence** (Scheduled shutdown).
 
-## FASE 4: Reversión y Análisis (Defensa)
+## PHASE 4: Reversion and Analysis (Defense)
 
-* **Acción:** El usuario debe revertir manualmente las consecuencias.
-* **Pasos de Reversión:**
-    1.  Abrir la línea de comandos y escribir `shutdown /a` para cancelar el apagado.
-    2.  Cerrar la aplicación "Lupa" (magnify) haciendo clic en su icono o cerrando su ventana.
-    3.  Ejecutar `Cleanup_Tool.bat` para restaurar la distribución del teclado (o hacerlo manualmente a través del Panel de Control).
-* **Concepto:** La **Remediación** y la importancia de conocer los comandos del sistema para deshacer acciones no deseadas.
+* **Action:** The user must manually revert the consequences.
+* **Reversion Steps:**
+    1.  Open the Command Prompt and type `shutdown /a` to cancel the shutdown.
+    2.  Close the "Magnifier" application (magnify) by clicking its icon or closing its window.
+    3.  Execute `Cleanup_Tool.bat` to restore the keyboard layout (or do so manually via Control Panel).
+* **Concept:** **Remediation** and the importance of knowing system commands to undo unwanted actions.

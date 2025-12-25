@@ -1,83 +1,70 @@
-# 📄 Reporte del Proyecto: Amenaza Simulada Controlada (SimuThreat)
+# 📄 Project Report: Controlled Simulated Threat (SimuThreat)
 
-## 1. Introducción: Propósito y Alcance del Proyecto
+## 1. Introduction: Purpose and Scope
+The **SimuThreat** (Controlled Simulated Threat) project is a hands-on educational tool developed to safely deconstruct and demonstrate the **cyberattack lifecycle** within a controlled environment.
 
-El proyecto **SimuThreat** (Amenaza Simulada Controlada) es una herramienta educativa práctica desarrollada para desmantelar y demostrar de forma segura el **ciclo de vida de un ciberataque** en un entorno controlado.
+The primary goal is to illustrate common attacker **Tactics, Techniques, and Procedures (TTPs)** without causing actual harm. This report describes the **what, how, and why** of the simulation.
 
-El objetivo principal es ilustrar las **Tácticas, Técnicas y Procedimientos (TTPs)** comunes de los atacantes sin causar daño real. Este informe describe el **qué, cómo y por qué** de la simulación.
+### 🎯 Key Educational Objectives
+The project is designed to demonstrate the following concepts:
 
-### 🎯 Objetivos Educativos Clave
-
-El proyecto está diseñado para demostrar los siguientes conceptos:
-
-| Concepto | Demostración en SimuThreat |
+| Concept | Demonstration in SimuThreat |
 | :--- | :--- |
-| **Ingeniería Social / Vector de Entrega** | Cómo un archivo engañoso convence al usuario de ejecutar el *payload*. |
-| **Payload y Ejecución** | Activación del código (PowerShell) y sus efectos. |
-| **Killswitch** | Una "salida de emergencia" programada que detiene el ataque. |
-| **LOLBAS (Living Off the Land)** | Uso de binarios legítimos de Windows (`magnify.exe`, `PowerShell`) para fines hostiles. |
-| **Persistencia** | Simulación de una acción futura programada (`shutdown`). |
-| **Remediación** | Importancia de conocer los comandos del sistema para revertir rápidamente las acciones. |
+| **Social Engineering / Delivery Vector** | How a deceptive file convinces the user to execute the *payload*. |
+| **Payload and Execution** | Activation of the code (PowerShell) and its effects. |
+| **Killswitch** | A programmed "emergency exit" that halts the attack. |
+| **LOLBAS (Living Off the Land)** | Using legitimate Windows binaries (`magnify.exe`, `PowerShell`) for hostile purposes. |
+| **Persistence** | Simulating a scheduled future action (`shutdown`). |
+| **Remediation** | The importance of knowing system commands to quickly revert actions. |
 
 ---
 
-## 2. Metodología: El Flujo Técnico del Ataque Simulado
+## 2. Methodology: The Technical Flow of the Simulated Attack
+The simulation runs through three main scripts and follows a logical sequence that mimics a real-world attack.
 
-La simulación se ejecuta a través de tres scripts principales y sigue una secuencia lógica que imita un ataque real. 
+### A. Execution Phase
+1. **Entry Vector:** The user starts the simulation by running `01_Initial_Execution.bat`.
+2. **Activation:** This Batch file immediately launches the main PowerShell script, `02_Lock_Simulator.ps1`, using the `-ExecutionPolicy Bypass` parameter to ensure execution within the testing environment.
 
-### A. Fase de Ejecución
+### B. Lockdown and Control Phase
+The script `02_Lock_Simulator.ps1` takes control:
+* **Simulated Lock:** It initiates a loop that presents a password input window, preventing normal interaction with the desktop.
+* **Pressure (Countdown):** A **120-second countdown** is established.
 
-1.  **Vector de Entrada:** El usuario inicia la simulación ejecutando **`01_Initial_Execution.bat`**.
-2.  **Activación:** Este archivo Batch lanza inmediatamente el script principal de PowerShell, **`02_Lock_Simulator.ps1`**, utilizando el parámetro `-ExecutionPolicy Bypass` para asegurar su ejecución en el entorno de prueba.
+### C. Branching Phase (Killswitch vs. Consequence)
+The flow branches here, demonstrating the control provided by the code:
 
-### B. Fase de Bloqueo y Control
-
-El script **`02_Lock_Simulator.ps1`** toma el control:
-
-* **Bloqueo Simulado:** Inicia un bucle que presenta una ventana de entrada de contraseña, impidiendo la interacción normal con el escritorio.
-* **Presión (Cuenta Atrás):** Se establece una **cuenta atrás de 120 segundos**.
-
-### C. Fase de Desvío (Killswitch vs. Consecuencia)
-
-El flujo se bifurca aquí, demostrando el control que tiene el código:
-
-| Escenario | Resultado | Concepto Demostrado |
+| Scenario | Result | Concept Demonstrated |
 | :--- | :--- | :--- |
-| **Éxito (Killswitch)** | Se introduce la contraseña correcta. El script finaliza inmediatamente y de forma segura. | **Killswitch** (Mecanismo de control). |
-| **Fallo (Consecuencia)** | El tiempo expira sin introducir la contraseña. El script llama a **`03_Reversible_Consequence.bat`**. | **Activación del Payload de Consecuencia**. |
+| **Success (Killswitch)** | The correct password is entered. The script terminates immediately and safely. | **Killswitch** (Control Mechanism). |
+| **Failure (Consequence)** | Time expires without entering the password. The script calls `03_Reversible_Consequence.bat`. | **Consequence Payload Activation**. |
 
-### D. Fase de Consecuencia Reversible
-
-El script **`03_Reversible_Consequence.bat`** ejecuta una serie de acciones inofensivas pero disruptivas:
-
-1.  **Inversión de Colores:** Llama a la herramienta legítima de Windows **`magnify.exe`** con el parámetro `-inv`, invirtiendo el color de la pantalla. (Ejemplo de **LOLBAS**).
-2.  **Cambio de Teclado:** Utiliza PowerShell para modificar la configuración de idioma del usuario, cambiando la distribución del teclado a **Chino Simplificado (zh-CN)**.
-3.  **Persistencia Simulada:** Programa un apagado del sistema en 60 segundos con **`shutdown /s /t 60`**, simulando una acción de *destrucción programada*.
+### D. Reversible Consequence Phase
+The script `03_Reversible_Consequence.bat` executes a series of harmless but disruptive actions:
+1. **Color Inversion:** Calls the legitimate Windows tool `magnify.exe` with the `-inv` parameter, inverting the screen colors (**LOLBAS** example).
+2. **Keyboard Layout Change:** Uses PowerShell to modify the user's language settings, changing the keyboard layout to **Simplified Chinese (zh-CN)**.
+3. **Simulated Persistence:** Schedules a system shutdown in 60 seconds using `shutdown /s /t 60`, simulating a *scheduled destructive action*.
 
 ---
 
-## 3. Seguridad del Proyecto y Remedios
+## 3. Project Safety and Remediation
+Test environment safety is the highest priority.
 
-La seguridad del entorno de prueba es la máxima prioridad.
+### A. Isolated Environment
+The code **must only be executed in a Virtual Machine (VM)** with the network adapter configured to **"Host-only"** or **"Internal Network"** mode. This measure ensures that the code, although benign, does not accidentally interact with the main network or the host operating system.
 
-### A. Entorno Aislado
+### B. Remediation Mechanisms
+Each consequence has a direct and quick solution, teaching the user how to respond to an attack:
 
-El código **solo debe ejecutarse en una Máquina Virtual (VM)** con el adaptador de red configurado en modo **"Solo anfitrión"** o **"Red interna"**. Esta medida garantiza que el código, aunque benigno, no interactúe accidentalmente con la red principal ni con el sistema operativo anfitrión.
-
-### B. Mecanismos de Reversibilidad (Remediación)
-
-Cada consecuencia tiene una solución directa y rápida, enseñando al usuario cómo responder a un ataque:
-
-| Consecuencia | Remedio Rápido |
+| Consequence | Quick Remedy |
 | :--- | :--- |
-| **Apagado Programado** | Abrir Símbolo del Sistema (CMD) y ejecutar **`shutdown /a`** (abortar). |
-| **Inversión de Colores** | Cerrar la aplicación **Lupa (`magnify.exe`)** desde la barra de tareas. |
-| **Cambio de Teclado** | Ejecutar **`Cleanup_Tool.bat`** para restaurar el LCID del teclado (o restaurarlo manualmente desde el Panel de Control). |
+| **Scheduled Shutdown** | Open Command Prompt (CMD) and run `shutdown /a` (abort). |
+| **Color Inversion** | Close the **Magnifier (`magnify.exe`)** application from the taskbar. |
+| **Keyboard Change** | Run `Cleanup_Tool.bat` to restore the keyboard LCID (or restore it manually via Control Panel). |
 
-El archivo **`Cleanup_Tool.bat`** centraliza todos estos comandos de remediación para una reversión instantánea del entorno de prueba.
+The `Cleanup_Tool.bat` file centralizes all these remediation commands for an instant reversal of the test environment.
 
 ---
 
-## 4. Conclusión
-
-**SimuThreat** es una herramienta educativa valiosa que logra equilibrar la **visibilidad y el impacto** de un ciberataque (cambio de teclado, bloqueo simulado) con la **seguridad y el control** necesarios para un entorno académico. El proyecto demuestra con claridad cómo los scripts simples pueden utilizar herramientas legítimas del sistema (LOLBAS) para alcanzar los objetivos de un atacante, reforzando la necesidad de implementar soluciones de seguridad que monitoreen el uso anómalo de los binarios del sistema, y no solo la firma de *malware* tradicional.
+## 4. Conclusion
+**SimuThreat** is a valuable educational tool that balances the **visibility and impact** of a cyberattack with the **safety and control** necessary for an academic setting. The project clearly demonstrates how simple scripts can utilize legitimate system tools (LOLBAS) to achieve attacker objectives, reinforcing the need for security solutions that monitor anomalous use of system binaries, rather than just traditional malware signatures.

@@ -1,42 +1,42 @@
-# 🛡️ Proyecto Educativo: Amenaza Simulada Controlada (SimuThreat)
+# 🛡️ Educational Project: Controlled Simulated Threat (SimuThreat)
 
-## ⚠️ ¡ADVERTENCIA IMPORTANTE! SÓLO PARA ENTORNOS SEGUROS
+## ⚠️ IMPORTANT WARNING! FOR SECURE ENVIRONMENTS ONLY
 
-Este proyecto de código ha sido diseñado y probado **EXCLUSIVAMENTE** para su uso en **Máquinas Virtuales (VMs)** o entornos de prueba aislados.
+This code project has been designed and tested **EXCLUSIVELY** for use in **Virtual Machines (VMs)** or isolated testing environments.
 
-**BAJO NINGUNA CIRCUNSTANCIA** debe ser ejecutado en sistemas operativos de producción, sistemas personales o redes corporativas reales. Su propósito es **100% educativo y defensivo**.
-
----
-
-## 💡 Objetivo del Proyecto
-
-El objetivo de **SimuThreat** es proporcionar una demostración práctica y segura del flujo de vida de un *payload* de *malware* básico, ilustrando conceptos clave de ciberseguridad, incluyendo:
-
-* **Vector de Entrega:** Simulación de cómo un script puede ser introducido en un sistema.
-* **Payload y Killswitch:** Demostración de un código de ejecución y una "salida de emergencia" controlada.
-* **LOLBAS (Living Off the Land):** Uso de herramientas legítimas del sistema (como `magnify` y PowerShell) para propósitos no deseados.
-* **Consecuencias Reversibles:** Activación de efectos visibles pero inofensivos (cambio de teclado, inversión de pantalla).
-* **Persistencia Simulada:** Uso del comando `shutdown` para simular una acción programada.
+**UNDER NO CIRCUMSTANCES** should this be executed on production operating systems, personal devices, or real corporate networks. Its purpose is **100% educational and defensive**.
 
 ---
 
-## 🚀 Cómo Empezar la Demostración
+## 💡 Project Objective
 
-**PASO 1: Configurar la Máquina Virtual (VM)**
-* Siga las instrucciones detalladas en `Documentation/Setup_VM_Guide.md`. **Este paso es obligatorio.**
+The goal of **SimuThreat** is to provide a practical and safe demonstration of the lifecycle of a basic *malware payload*, illustrating key cybersecurity concepts, including:
 
-**PASO 2: Iniciar la Simulación**
-1.  Copie el contenido de la carpeta `Simulation_Payload/` a la VM.
-2.  Ejecute el archivo principal: `01_Initial_Execution.bat`.
-
-**PASO 3: Ejecutar el Flujo**
-* Siga el guion de la demostración detallado en `ATTACK_FLOW.md`.
+* **Delivery Vector:** Simulation of how a script can be introduced into a system.
+* **Payload and Killswitch:** Demonstration of execution code and a controlled "emergency exit."
+* **LOLBAS (Living Off the Land Binaries and Scripts):** Utilizing legitimate system tools (such as `magnify` and PowerShell) for unintended purposes.
+* **Reversible Consequences:** Activation of visible but harmless effects (keyboard layout change, screen inversion).
+* **Simulated Persistence:** Use of the `shutdown` command to simulate a scheduled action.
 
 ---
 
-## 🧹 Limpieza Rápida
+## 🚀 How to Start the Demonstration
 
-Para detener cualquier efecto (como el apagado programado o el cambio de teclado) inmediatamente, ejecute el archivo:
+**STEP 1: Set Up the Virtual Machine (VM)**
+* Follow the detailed instructions in `Documentation/Setup_VM_Guide.md`. **This step is mandatory.**
+
+**STEP 2: Start the Simulation**
+1. Copy the contents of the `Simulation_Payload/` folder to the VM.
+2. Execute the main file: `01_Initial_Execution.bat`.
+
+**STEP 3: Follow the Flow**
+* Follow the demonstration script detailed in `ATTACK_FLOW.md`.
+
+---
+
+## 🧹 Quick Cleanup
+
+To immediately stop any effects (such as the scheduled shutdown or keyboard change), execute the following file:
 
 ```bash
 Cleanup_Tool.bat

@@ -1,26 +1,33 @@
-# 📚 Conceptos de Ciberseguridad Explicados
+# 📚 Cybersecurity Concepts Explained
 
-Este proyecto de código (SimuThreat) está diseñado para ilustrar los siguientes conceptos defensivos y de seguridad:
+The **SimuThreat** project is designed to provide a practical demonstration of the following defensive and security concepts:
 
-## 1. Payload Benigno vs. Malware Real
+## 1. Benign Payload vs. Real Malware
 
-* **Definición:** Un *payload* es el componente que realiza la acción deseada por el atacante.
-* **SimuThreat:** Nuestro payload (`02_Lock_Simulator.ps1`) solo ejecuta una función de bloqueo y cambio de configuración, sin cifrar archivos ni robar información. Un *malware* real tendría código malicioso destructivo o de espionaje.
+* **Definition:** A **payload** is the component of an attack that performs the specific action intended by the attacker (e.g., data theft, encryption, or system disruption).
+* **SimuThreat:** Our payload (`02_Lock_Simulator.ps1`) only executes a lockdown function and minor configuration changes without encrypting files or exfiltrating data. Real-world **malware** would contain destructive or espionage-oriented malicious code.
 
-## 2. Killswitch (Interruptor de Muerte)
 
-* **Definición:** Una característica dentro del código malicioso que permite al desarrollador (o al atacante) detener su funcionamiento remotamente, o en este caso, mediante una contraseña.
-* **SimuThreat:** La contraseña en `02_Lock_Simulator.ps1` actúa como un **Killswitch**. En la realidad, esto podría ser una dirección IP, una clave de registro o una contraseña que permite al atacante detener una campaña de *ransomware* si sale mal.
+
+## 2. Killswitch
+
+* **Definition:** A mechanism embedded within malicious code that allows the developer or attacker to stop its operation immediately. 
+* **SimuThreat:** The password in `02_Lock_Simulator.ps1` acts as a **Killswitch**. In a real-world scenario, a killswitch might be triggered by a specific domain name (as seen in the WannaCry ransomware), a registry key, or a remote command from a Command and Control (C2) server.
 
 ## 3. LOLBAS (Living Off the Land Binaries and Scripts)
 
-* **Definición:** La práctica de utilizar herramientas y binarios legítimos que ya existen en el sistema operativo (ej. PowerShell, `cmd.exe`, `bitsadmin`, `certutil`) para realizar acciones maliciosas.
+* **Definition:** The practice of utilizing legitimate, pre-installed system tools (such as PowerShell, `cmd.exe`, `bitsadmin`, or `certutil`) to perform malicious actions.
 * **SimuThreat:**
-    * Usamos **PowerShell** para la lógica principal y el cambio de teclado.
-    * Usamos **`magnify.exe`** para invertir los colores de la pantalla.
-    * **Importancia Defensiva:** Esto hace que los ataques sean difíciles de detectar, ya que las herramientas usadas son de confianza para el sistema operativo.
+    * **PowerShell:** Used for the core logic and modifying user language settings.
+    * **`magnify.exe`:** Used to invert screen colors.
+* **Defensive Importance:** Using trusted binaries allows attackers to bypass traditional antivirus signatures. Security professionals must monitor for **anomalous behavior** in these trusted tools rather than just blocking the files themselves.
 
-## 4. Persistencia (Simulada)
 
-* **Definición:** Las técnicas utilizadas por los atacantes para asegurar que su código se vuelva a ejecutar después de un reinicio del sistema, un cierre de sesión, o en un momento específico.
-* **SimuThreat:** El comando `shutdown /s /t 60` simula una **acción programada**. En la realidad, esto sería reemplazado por la modificación del Registro de Windows (`Run` Keys) o la creación de Tareas Programadas maliciosas.
+
+## 4. Persistence (Simulated)
+
+* **Definition:** Techniques used by attackers to maintain access to a system across restarts, logoffs, or other interruptions.
+* **SimuThreat:** The `shutdown /s /t 60` command simulates a **scheduled action**. In a professional penetration test or a real attack, persistence is typically achieved through:
+    * **Registry Run Keys:** Automatically launching code on startup.
+    * **Scheduled Tasks:** Executing code at specific intervals.
+    * **Service Creation:** Running malicious code as a background system service.
